@@ -16,19 +16,28 @@ spec:
         - cat
       tty: true
     - name: docker
-      image: docker:latest
-      command:
-        - cat
-      tty: true
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - mountPath: /var/run/docker.sock
-          name: docker-sock
+          image: docker:latest
+          command:
+            - cat
+          tty: true
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
+
+        - name: dind
+          image: docker:dind
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+          volumeMounts:
+            - name: docker-storage
+              mountPath: /var/lib/docker
+
   volumes:
-    - name: docker-sock
-      hostPath:
-        path: /var/run/docker.sock
+    - name: docker-storage
+      emptyDir: {}
 """
 		}
 	}
