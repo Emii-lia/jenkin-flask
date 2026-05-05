@@ -16,7 +16,7 @@ spec:
         - cat
       tty: true
     - name: docker
-      image: docker
+      image: docker:latest
       command:
         - cat
       tty: true
