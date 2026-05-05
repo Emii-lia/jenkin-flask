@@ -1,8 +1,5 @@
 pipeline {
 	agent {
-		triggers {
-			pollSCM('* * * * *')
-		}
 		kubernetes {
 			label "jenkins-agent-app"
 			yaml """
@@ -32,6 +29,9 @@ spec:
         path: /var/run/docker.sock
 """
 		}
+	}
+	triggers {
+		pollSCM('* * * * *')
 	}
 	stages {
 		stage("Test python") {
