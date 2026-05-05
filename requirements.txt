@@ -1,0 +1,7 @@
+Click>=8.3
+Flask>=3.1
+itsdangerous>=2.2
+Jinja2>=3.1
+MarkupSafe>=3.0
+Werkzeug>=3.1
+unittest-xml-reporting==4.0.0
