@@ -38,6 +38,11 @@ spec:
       volumeMounts:
         - name: docker-storage
           mountPath: /var/lib/docker
+    - name: kubectl
+      image: lachlanevenson/k8s-kubectl:latest
+      command:
+        - cat
+      tty: true
 
   volumes:
     - name: docker-storage
@@ -63,6 +68,14 @@ spec:
           sh "docker build -t registry:5000/pythontest:latest ."
           sh "docker push registry:5000/pythontest:latest"
 			  }
+			}
+		}
+		stage("Deploy") {
+			steps {
+				container("kubectl") {
+					sh "kubectl apply -f ./kubernetes/deployment.yaml"
+					sh "kubectl apply -f ./kubernetes/service.yaml"
+				}
 			}
 		}
 	}
