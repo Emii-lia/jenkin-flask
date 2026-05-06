@@ -56,8 +56,8 @@ spec:
 		stage('Build docker image') {
 			steps {
 			  container("docker") {
-          sh "docker build -t localhost:4000/pythontest:latest ."
-          sh "docker push localhost:4000/pythontest:latest"
+          sh "docker build -t registry:5000/pythontest:latest ."
+          sh "docker push registry:5000/pythontest:latest"
 			  }
 			}
 		}
