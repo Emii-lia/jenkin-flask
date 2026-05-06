@@ -25,9 +25,7 @@ spec:
           value: tcp://localhost:2375
         - name: DOCKER_TLS_CERTDIR
           value: ""
-        - name: DOCKER_OPTS
-          value: "--insecure-registry=registry:5000"
-
+          
     - name: dind
       image: docker:dind
       securityContext:
@@ -35,6 +33,8 @@ spec:
       env:
         - name: DOCKER_TLS_CERTDIR
           value: ""
+      args:
+        - --insecure-registry=registry:5000
       volumeMounts:
         - name: docker-storage
           mountPath: /var/lib/docker
